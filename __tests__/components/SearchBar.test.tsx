@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { SearchBar } from '@/components/molecules/SearchBar';
 import { useProducts } from '@/lib/queries/products';
@@ -13,7 +14,7 @@ jest.mock('next/navigation', () => ({
 }));
 
 jest.mock('next/image', () => {
-  const MockImage = ({ src, alt, width, height, className }: any) => (
+  const MockImage = ({ src, alt, width, height, className }: React.ComponentProps<'img'>) => (
     <img src={src} alt={alt} width={width} height={height} className={className} />
   );
   MockImage.displayName = 'MockImage';

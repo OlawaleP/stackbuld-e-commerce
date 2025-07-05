@@ -40,7 +40,7 @@ The app is fast, user-friendly, and mobile-ready.
 
 ## Getting Started
 
-## Install:npm install
+Install:npm install
 
 
 Run:npm run dev

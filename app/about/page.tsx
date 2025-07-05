@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { Button } from '@/components/atoms/Button';
 import Link from 'next/link';
