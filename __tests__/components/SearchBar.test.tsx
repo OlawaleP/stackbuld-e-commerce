@@ -4,20 +4,26 @@ import { useProducts } from '@/lib/queries/products';
 import { useRouter } from 'next/navigation';
 import { Product } from '@/lib/types/product';
 
-// Mock dependencies
 jest.mock('@/lib/queries/products', () => ({
   useProducts: jest.fn(),
 }));
+
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: (props: any) => <img {...props} />,
-}));
+
+jest.mock('next/image', () => {
+  const MockImage = ({ src, alt, width, height, className }: any) => (
+    <img src={src} alt={alt} width={width} height={height} className={className} />
+  );
+  MockImage.displayName = 'MockImage';
+  return MockImage;
+});
+
 jest.mock('use-debounce', () => ({
   useDebounce: jest.fn((value) => [value]),
 }));
+
 jest.mock('lucide-react', () => ({
   Search: () => <svg data-testid="search-icon" />,
   X: () => <svg data-testid="clear-icon" />,
@@ -61,14 +67,22 @@ describe('SearchBar', () => {
 
   it('filters products and navigates to product page on click', async () => {
     render(<SearchBar />);
+    
     const input = screen.getByPlaceholderText('Search products...');
     fireEvent.change(input, { target: { value: 'smart' } });
+    
     await waitFor(() => {
       expect(screen.getByText('Smartphone')).toBeInTheDocument();
       expect(screen.queryByText('Laptop')).not.toBeInTheDocument();
     });
-    const result = screen.getByText('Smartphone').closest('a')!;
-    fireEvent.click(result);
-    expect(mockPush).toHaveBeenCalledWith('/products/smartphone');
+    
+    const productLink = screen.getByText('Smartphone').closest('a')!;
+    expect(productLink).toHaveAttribute('href', '/product/smartphone');
+    
+    fireEvent.click(productLink);
+    
+    await waitFor(() => {
+      expect(screen.queryByText('Smartphone')).not.toBeInTheDocument();
+    });
   });
 });
