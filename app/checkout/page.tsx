@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { handleInputChange, validateForm } from '@/lib/utils/helpers';
+import { setToStorage } from '@/lib/utils/storage';
+import { Order } from '@/lib/types/order';
 import { CheckoutForm, FormErrors } from '@/lib/utils';
 
 export default function CheckoutPage() {
@@ -52,6 +54,20 @@ export default function CheckoutPage() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
       const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
+      
+      const order: Order = {
+        id: orderId,
+        date: new Date().toISOString(),
+        total: getTotal() * 1.08, 
+        status: 'Confirmed',
+        items: items.map((item) => ({
+          product: item.product,
+          quantity: item.quantity,
+        })),
+      };
+      
+      const existingOrders = JSON.parse(localStorage.getItem('mini-commerce-orders') || '[]');
+      setToStorage('mini-commerce-orders', [...existingOrders, order]);
       
       clearCart();
       router.push(`/success?orderId=${orderId}`);
