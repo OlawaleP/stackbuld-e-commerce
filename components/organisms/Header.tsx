@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useCartStore } from '@/lib/store/cart-store';
 import { Badge } from '@/components/atoms/Badge';
+import { SearchBar } from '@/components/molecules/SearchBar';
 
 export const Header: React.FC = () => {
   const itemCount = useCartStore((state) => state.getItemCount());
@@ -12,6 +13,10 @@ export const Header: React.FC = () => {
           <Link href="/" className="text-2xl font-bold text-gray-900">
             Mini-Commerce
           </Link>
+          
+          <div className="flex-1 mx-4">
+            <SearchBar />
+          </div>
           
           <nav className="flex items-center space-x-6">
             <Link href="/" className="text-gray-600 hover:text-gray-900">
