@@ -1,66 +1,65 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { useProducts } from '@/lib/queries/products';
-import { ProductGrid } from '@/components/organisms/ProductGrid';
-import { LoadingSpinner } from '@/components/atoms/LoadingSpinner';
 import { MainLayout } from '@/components/templates/MainLayout';
+import { Price } from '@/components/atoms/Price';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { LoadingSpinner } from '@/components/atoms/LoadingSpinner';
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q')?.toLowerCase() || '';
-  const { data: products, isLoading, error } = useProducts();
+  const { data: products = [], isLoading, error } = useProducts();
 
-  if (isLoading) {
-    return (
-      <MainLayout title="Search Products" description="Search results for products at Mini-Commerce">
-        <div className="flex min-h-[400px] items-center justify-center">
-          <LoadingSpinner size="lg" />
-        </div>
-      </MainLayout>
-    );
-  }
-
-  if (error) {
-    return (
-      <MainLayout title="Search Error" description="Error searching for products at Mini-Commerce">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600">Error Loading Products</h2>
-          <p className="mt-2 text-gray-600">
-            Unable to fetch products. Please try again later.
-          </p>
-        </div>
-      </MainLayout>
-    );
-  }
-
-  const filteredProducts = products?.filter(
-    (product) =>
-      product.name.toLowerCase().includes(query) ||
-      product.description.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query)
-  ) || [];
+  const filteredProducts = query
+    ? products.filter((product) => product.name.toLowerCase().includes(query))
+    : products;
 
   return (
     <MainLayout
-      title={`Search: ${query || 'All Products'}`}
-      description={`Search results for "${query}" at Mini-Commerce`}
+      title={`Search Results for "${query}"`}
+      description={`Find products matching "${query}" at Mini-Commerce`}
     >
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Search Results for "{query || 'All Products'}"
-          </h1>
-          <p className="mt-2 text-gray-600">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'result' : 'results'} found
-          </p>
-        </div>
-        
-        {filteredProducts.length > 0 ? (
-          <ProductGrid products={filteredProducts} />
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          Search Results for "{query || 'All Products'}"
+        </h1>
+        {isLoading ? (
+          <div className="flex justify-center py-8">
+            <LoadingSpinner size="lg" />
+          </div>
+        ) : error ? (
+          <div className="text-center text-red-600">
+            Error loading products. Please try again.
+          </div>
+        ) : filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <Link
+                key={product.id}
+                href={`/product/${product.slug}`}
+                className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition"
+                aria-label={`View details for ${product.name}`}
+              >
+                <div className="h-48 w-full">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={200}
+                    height={200}
+                    className="h-full w-full object-cover rounded"
+                  />
+                </div>
+                <h2 className="text-lg font-medium text-gray-900 mt-2">{product.name}</h2>
+                <Price amount={product.price} />
+              </Link>
+            ))}
+          </div>
         ) : (
-          <div className="text-center">
-            <p className="text-gray-600">No products found matching your search.</p>
+          <div className="text-center text-gray-600">
+            No products found for "{query}"
           </div>
         )}
       </div>
