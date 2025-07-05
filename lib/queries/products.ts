@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { Product } from '../types/product';
+import { getFromStorage, setToStorage } from '@/lib/utils/storage';
 
 const PRODUCTS_KEY = 'mini-commerce-products';
 
 const seedProducts = async (): Promise<Product[]> => {
-  const stored = localStorage.getItem(PRODUCTS_KEY);
-  if (stored) {
-    return JSON.parse(stored);
+  const stored = getFromStorage<Product[]>(PRODUCTS_KEY, []);
+  if (stored.length > 0) {
+    return stored;
   }
   
   const response = await fetch('/data/products.json');
@@ -15,7 +16,7 @@ const seedProducts = async (): Promise<Product[]> => {
   }
   
   const products: Product[] = await response.json();
-  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+  setToStorage(PRODUCTS_KEY, products);
   return products;
 };
 

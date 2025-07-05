@@ -1,4 +1,3 @@
-// __tests__/components/ProductCard.test.tsx
 import '@jest/globals';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ProductCard } from '@/components/molecules/ProductCard';
