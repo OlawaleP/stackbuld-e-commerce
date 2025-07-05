@@ -1,8 +1,7 @@
-import '@jest/globals';
+// __tests__/components/ProductCard.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ProductCard } from '@/components/molecules/ProductCard';
 import { Product } from '@/lib/types/product';
-import { describe, it } from 'node:test';
 
 const mockProduct: Product = {
   id: '1',
@@ -17,9 +16,10 @@ const mockProduct: Product = {
   reviews: 10,
 };
 
+const mockAddItem = jest.fn();
 jest.mock('@/lib/store/cart-store', () => ({
   useCartStore: () => ({
-    addItem: jest.fn(),
+    addItem: mockAddItem,
   }),
 }));
 
@@ -33,15 +33,12 @@ describe('ProductCard', () => {
     expect(screen.getByText('In Stock')).toBeInTheDocument();
   });
   
-  it('handles add to cart action', () => {
+  it('calls addItem when Add to Cart button is clicked', () => {
     render(<ProductCard product={mockProduct} />);
     
     const addButton = screen.getByText('Add to Cart');
     fireEvent.click(addButton);
     
-    // Test that the function was called
-    expect(addButton).toBeInTheDocument();
+    expect(mockAddItem).toHaveBeenCalledWith(mockProduct);
   });
 });
-
-
