@@ -44,13 +44,10 @@ export default function CheckoutPage() {
     e.preventDefault();
     setIsProcessing(true);
     
-    // Simulate payment processing
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    // Generate order ID
     const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
     
-    // Clear cart and redirect to success
     clearCart();
     router.push(`/success?orderId=${orderId}`);
   };
