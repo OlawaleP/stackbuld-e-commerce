@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils';
 import { forwardRef, HTMLAttributes } from 'react';
 
-interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
+interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: 'success' | 'error' | 'warning' | 'info';
 }
 
-const Badge = forwardRef<HTMLDivElement, BadgeProps>(
+const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, variant = 'info', children, ...props }, ref) => {
     const variants = {
       success: 'bg-green-100 text-green-800',
@@ -15,7 +15,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     };
 
     return (
-      <div
+      <span
         ref={ref}
         className={cn(
           'inline-flex items-center justify-center rounded-full px-2 py-1 text-xs font-medium',
@@ -25,7 +25,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         {...props}
       >
         {children}
-      </div>
+      </span>
     );
   }
 );
