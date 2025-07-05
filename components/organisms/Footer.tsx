@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Mini-Commerce</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Stackbuld</h3>
             <p className="mt-2 text-sm text-gray-600">
               Your one-stop shop for amazing products at unbeatable prices. Get the best offer now!!!
             </p>
