@@ -108,7 +108,7 @@ export default function OrderDetailsPage() {
           </div>
 
           <Link href="/orders">
-            <Button variant="outline">Back to Orders</Button>
+            <Button variant="outline" className="mt-4">Back to Orders</Button>
           </Link>
         </div>
       </div>
