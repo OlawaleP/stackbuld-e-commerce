@@ -10,10 +10,7 @@ import { QuantitySelector } from '@/components/molecules/QuantitySelector';
 import { MainLayout } from '@/components/templates/MainLayout';
 import Image from 'next/image';
 import { useState } from 'react';
-
-interface ProductPageProps {
-  params: { slug: string };
-}
+import { ProductPageProps } from '@/lib/utils';
 
 export default function ProductPage({ params }: ProductPageProps) {
   const [quantity, setQuantity] = useState(1);

@@ -9,30 +9,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { handleInputChange, validateForm } from '@/lib/utils/helpers';
-
-interface CheckoutForm {
-  email: string;
-  firstName: string;
-  lastName: string;
-  address: string;
-  city: string;
-  postalCode: string;
-  cardNumber: string;
-  expiryDate: string;
-  cvv: string;
-}
-
-interface FormErrors {
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  address?: string;
-  city?: string;
-  postalCode?: string;
-  cardNumber?: string;
-  expiryDate?: string;
-  cvv?: string;
-}
+import { CheckoutForm, FormErrors } from '@/lib/utils';
 
 export default function CheckoutPage() {
   const { items, getTotal, clearCart } = useCartStore();
@@ -52,26 +29,64 @@ export default function CheckoutPage() {
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [displayCvv, setDisplayCvv] = useState('');
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    setFormErrors({});
+    
     const errors = validateForm(formData);
+    
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
+      const firstErrorField = Object.keys(errors)[0];
+      const errorElement = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+      if (errorElement) {
+        errorElement.focus();
+      }
       return;
     }
 
     setIsProcessing(true);
     
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      
+      const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
+      
+      clearCart();
+      router.push(`/success?orderId=${orderId}`);
+    } catch (error) {
+      console.error('Payment processing error:', error);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleFormInputChange = (field: keyof CheckoutForm, value: string) => {
+    handleInputChange(field, value, formData, setFormData, setFormErrors, setDisplayCvv);
+  };
+
+  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    let actualValue = formData.cvv;
     
-    // Generate order ID
-    const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
+    if (inputValue.length > displayCvv.length) {
+      const newChar = inputValue.slice(-1);
+      if (/\d/.test(newChar)) {
+        actualValue = (formData.cvv + newChar).slice(0, 3);
+      }
+    } else if (inputValue.length < displayCvv.length) {
+      actualValue = formData.cvv.slice(0, inputValue.length);
+    }
     
-    // Clear cart and redirect to success
-    clearCart();
-    router.push(`/success?orderId=${orderId}`);
+    setFormData({ ...formData, cvv: actualValue });
+    setDisplayCvv(actualValue ? '*'.repeat(actualValue.length) : '');
+    
+    setFormErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      delete newErrors.cvv;
+      return newErrors;
+    });
   };
 
   const total = getTotal();
@@ -105,11 +120,13 @@ export default function CheckoutPage() {
                 <div className="mt-4 space-y-4">
                   <Input
                     label="Email"
+                    name="email"
                     type="email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                    onChange={(e) => handleFormInputChange('email', e.target.value)}
                     required
                     error={formErrors.email}
+                    placeholder="your@email.com"
                   />
                 </div>
               </div>
@@ -120,40 +137,50 @@ export default function CheckoutPage() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <Input
                       label="First Name"
+                      name="firstName"
                       value={formData.firstName}
-                      onChange={(e) => handleInputChange('firstName', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                      onChange={(e) => handleFormInputChange('firstName', e.target.value)}
                       required
                       error={formErrors.firstName}
+                      placeholder="Ola"
                     />
                     <Input
                       label="Last Name"
+                      name="lastName"
                       value={formData.lastName}
-                      onChange={(e) => handleInputChange('lastName', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                      onChange={(e) => handleFormInputChange('lastName', e.target.value)}
                       required
                       error={formErrors.lastName}
+                      placeholder="Ojo"
                     />
                   </div>
                   <Input
                     label="Address"
+                    name="address"
                     value={formData.address}
-                    onChange={(e) => handleInputChange('address', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                    onChange={(e) => handleFormInputChange('address', e.target.value)}
                     required
                     error={formErrors.address}
+                    placeholder="123 Main Street"
                   />
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <Input
                       label="City"
+                      name="city"
                       value={formData.city}
-                      onChange={(e) => handleInputChange('city', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                      onChange={(e) => handleFormInputChange('city', e.target.value)}
                       required
                       error={formErrors.city}
+                      placeholder="New York"
                     />
                     <Input
                       label="Postal Code"
+                      name="postalCode"
                       value={formData.postalCode}
-                      onChange={(e) => handleInputChange('postalCode', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                      onChange={(e) => handleFormInputChange('postalCode', e.target.value)}
                       required
                       error={formErrors.postalCode}
+                      placeholder="10001"
                     />
                   </div>
                 </div>
@@ -164,26 +191,32 @@ export default function CheckoutPage() {
                 <div className="mt-4 space-y-4">
                   <Input
                     label="Card Number"
+                    name="cardNumber"
                     value={formData.cardNumber}
-                    onChange={(e) => handleInputChange('cardNumber', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                    onChange={(e) => handleFormInputChange('cardNumber', e.target.value)}
                     placeholder="1234 5678 9012 3456"
+                    maxLength={19}
                     required
                     error={formErrors.cardNumber}
                   />
                   <div className="grid grid-cols-2 gap-4">
                     <Input
                       label="Expiry Date"
+                      name="expiryDate"
                       value={formData.expiryDate}
-                      onChange={(e) => handleInputChange('expiryDate', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                      onChange={(e) => handleFormInputChange('expiryDate', e.target.value)}
                       placeholder="MM/YY"
+                      maxLength={5}
                       required
                       error={formErrors.expiryDate}
                     />
                     <Input
                       label="CVV"
+                      name="cvv"
                       value={displayCvv}
-                      onChange={(e) => handleInputChange('cvv', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
-                      placeholder="***"
+                      onChange={handleCvvChange}
+                      placeholder="123"
+                      maxLength={3}
                       required
                       error={formErrors.cvv}
                     />

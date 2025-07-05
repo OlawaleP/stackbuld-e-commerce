@@ -12,7 +12,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="space-y-1">
         {label && (
           <label
-            htmlFor={props.id}
+            htmlFor={props.id || props.name}
             className="block text-sm font-medium text-gray-700"
           >
             {label}
@@ -21,17 +21,24 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           className={cn(
-            'flex h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-sm',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500',
-            error ? 'border-red-500' : 'border-gray-300',
+            'flex h-10 w-full rounded-md border px-3 py-2 text-sm',
+            'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            'transition-colors duration-200',
+            // Better autofill styling
+            'autofill:bg-blue-50 autofill:text-blue-900',
+            error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300',
             className
           )}
           {...props}
         />
         {error && (
-          <p className="text-sm text-red-500">{error}</p>
+          <p className="text-sm text-red-500" role="alert">
+            {error}
+          </p>
         )}
       </div>
     );
   }
 );
+
+Input.displayName = 'Input';

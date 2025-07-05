@@ -42,10 +42,12 @@ export const validateForm = (formData: CheckoutForm): FormErrors => {
   const errors: FormErrors = {};
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const currentYear = new Date().getFullYear() % 100;
+  const currentMonth = new Date().getMonth() + 1;
 
   if (!formData.email || !emailRegex.test(formData.email)) {
     errors.email = 'Please enter a valid email address';
   }
+
   if (!formData.firstName.trim()) {
     errors.firstName = 'First name is required';
   }
@@ -73,11 +75,12 @@ export const validateForm = (formData: CheckoutForm): FormErrors => {
   } else {
     const month = parseInt(expiryParts[0], 10);
     const year = parseInt(expiryParts[1], 10);
+    
     if (month < 1 || month > 12) {
       errors.expiryDate = 'Month must be between 01 and 12';
     } else if (year < currentYear || year > currentYear + 10) {
       errors.expiryDate = 'Year must be between current year and 10 years in the future';
-    } else if (year === currentYear && month < new Date().getMonth() + 1) {
+    } else if (year === currentYear && month < currentMonth) {
       errors.expiryDate = 'Card has expired';
     }
   }
@@ -94,21 +97,30 @@ export const handleInputChange = (
   value: string,
   formData: CheckoutForm,
   setFormData: (data: CheckoutForm) => void,
-  setFormErrors: (errors: FormErrors) => void,
+  setFormErrors: (errors: FormErrors | ((prevErrors: FormErrors) => FormErrors)) => void,
   setDisplayCvv: (value: string) => void
 ) => {
+  let updatedFormData = { ...formData };
+
   if (field === 'cardNumber') {
     const formatted = formatCardNumber(value);
-    setFormData({ ...formData, [field]: formatted });
+    updatedFormData[field] = formatted;
   } else if (field === 'expiryDate') {
     const formatted = formatExpiryDate(value);
-    setFormData({ ...formData, [field]: formatted });
+    updatedFormData[field] = formatted;
   } else if (field === 'cvv') {
-    setFormData({ ...formData, [field]: value.replace(/\D/g, '').slice(0, 3) });
-    setDisplayCvv(value ? '*'.repeat(value.replace(/\D/g, '').length) : '');
+    const cleanedValue = value.replace(/\*+/g, '').replace(/\D/g, '').slice(0, 3);
+    updatedFormData[field] = cleanedValue;
+    setDisplayCvv(cleanedValue ? '*'.repeat(cleanedValue.length) : '');
   } else {
-    setFormData({ ...formData, [field]: value });
+    updatedFormData[field] = value;
   }
 
-  setFormErrors({ ...formData, [field]: undefined });
+  setFormData(updatedFormData);
+
+  setFormErrors((prevErrors: FormErrors) => {
+    const newErrors = { ...prevErrors };
+    delete newErrors[field];
+    return newErrors;
+  });
 };

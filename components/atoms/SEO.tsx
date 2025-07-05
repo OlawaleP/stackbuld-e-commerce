@@ -9,13 +9,13 @@ interface SEOProps {
 }
 
 export const SEO: React.FC<SEOProps> = ({
-  title = 'Mini-Commerce',
+  title = 'Stackbuld-Commerce',
   description = 'Your one-stop shop for amazing products',
   keywords = 'e-commerce, shopping, products',
   image = '/og-image.jpg',
-  url = 'https://mini-commerce.vercel.app',
+  url = 'https://stackbuild-commerce.vercel.app',
 }) => {
-  const fullTitle = title.includes('Mini-Commerce') ? title : `${title} | Mini-Commerce`;
+  const fullTitle = title.includes('Stackbuild-Commerce') ? title : `${title} | Stackbuild-Commerce`;
   
   return (
     <Head>
@@ -42,7 +42,7 @@ export const SEO: React.FC<SEOProps> = ({
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'Mini-Commerce',
+            name: 'Stackbuild-Commerce',
             description,
             url,
           }),
