@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold text-gray-900">Mini-Commerce</h3>
             <p className="mt-2 text-sm text-gray-600">
-              Your one-stop shop for amazing products at unbeatable prices.
+              Your one-stop shop for amazing products at unbeatable prices. Get the best offer now!!!
             </p>
           </div>
           
@@ -36,16 +36,16 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold text-gray-900">Contact</h3>
             <ul className="mt-2 space-y-2 text-sm">
-              <li className="text-gray-600">Email: support@minicommerce.com</li>
-              <li className="text-gray-600">Phone: (123) 456-7890</li>
-              <li className="text-gray-600">123 Commerce St, Shop City</li>
+              <li className="text-gray-600">Email: support@stackbuldcommerce.com</li>
+              <li className="text-gray-600">Phone: (234) 991-390-7890</li>
+              <li className="text-gray-600">123 Stackbuld St, Shop City</li>
             </ul>
           </div>
         </div>
         
         <div className="mt-8 border-t border-gray-200 pt-8 text-center">
           <p className="text-sm text-gray-600">
-            &copy; {new Date().getFullYear()} Mini-Commerce. All rights reserved.
+            &copy; {new Date().getFullYear()} Stackbuld-Commerce. All rights reserved.
           </p>
         </div>
       </div>

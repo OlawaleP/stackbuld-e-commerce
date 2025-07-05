@@ -1,4 +1,3 @@
-// components/atoms/Badge.tsx
 import { cn } from '@/lib/utils';
 import { forwardRef, HTMLAttributes } from 'react';
 
