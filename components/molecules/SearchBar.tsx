@@ -7,7 +7,6 @@ import { Search, X } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useProducts } from '@/lib/queries/products';
-import { Product } from '@/lib/types/product';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDebounce } from 'use-debounce';
