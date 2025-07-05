@@ -8,6 +8,7 @@ import { CheckoutLayout } from '@/components/templates/CheckoutLayout';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { handleInputChange, validateForm } from '@/lib/utils/helpers';
 
 interface CheckoutForm {
   email: string;
@@ -19,6 +20,18 @@ interface CheckoutForm {
   cardNumber: string;
   expiryDate: string;
   cvv: string;
+}
+
+interface FormErrors {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  cardNumber?: string;
+  expiryDate?: string;
+  cvv?: string;
 }
 
 export default function CheckoutPage() {
@@ -36,19 +49,27 @@ export default function CheckoutPage() {
     expiryDate: '',
     cvv: '',
   });
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [displayCvv, setDisplayCvv] = useState('');
 
-  const handleInputChange = (field: keyof CheckoutForm, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const errors = validateForm(formData);
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
     setIsProcessing(true);
     
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Simulate payment processing
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     
+    // Generate order ID
     const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
     
+    // Clear cart and redirect to success
     clearCart();
     router.push(`/success?orderId=${orderId}`);
   };
@@ -86,8 +107,9 @@ export default function CheckoutPage() {
                     label="Email"
                     type="email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    onChange={(e) => handleInputChange('email', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                     required
+                    error={formErrors.email}
                   />
                 </div>
               </div>
@@ -99,34 +121,39 @@ export default function CheckoutPage() {
                     <Input
                       label="First Name"
                       value={formData.firstName}
-                      onChange={(e) => handleInputChange('firstName', e.target.value)}
+                      onChange={(e) => handleInputChange('firstName', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                       required
+                      error={formErrors.firstName}
                     />
                     <Input
                       label="Last Name"
                       value={formData.lastName}
-                      onChange={(e) => handleInputChange('lastName', e.target.value)}
+                      onChange={(e) => handleInputChange('lastName', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                       required
+                      error={formErrors.lastName}
                     />
                   </div>
                   <Input
                     label="Address"
                     value={formData.address}
-                    onChange={(e) => handleInputChange('address', e.target.value)}
+                    onChange={(e) => handleInputChange('address', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                     required
+                    error={formErrors.address}
                   />
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <Input
                       label="City"
                       value={formData.city}
-                      onChange={(e) => handleInputChange('city', e.target.value)}
+                      onChange={(e) => handleInputChange('city', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                       required
+                      error={formErrors.city}
                     />
                     <Input
                       label="Postal Code"
                       value={formData.postalCode}
-                      onChange={(e) => handleInputChange('postalCode', e.target.value)}
+                      onChange={(e) => handleInputChange('postalCode', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                       required
+                      error={formErrors.postalCode}
                     />
                   </div>
                 </div>
@@ -138,24 +165,27 @@ export default function CheckoutPage() {
                   <Input
                     label="Card Number"
                     value={formData.cardNumber}
-                    onChange={(e) => handleInputChange('cardNumber', e.target.value)}
+                    onChange={(e) => handleInputChange('cardNumber', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                     placeholder="1234 5678 9012 3456"
                     required
+                    error={formErrors.cardNumber}
                   />
                   <div className="grid grid-cols-2 gap-4">
                     <Input
                       label="Expiry Date"
                       value={formData.expiryDate}
-                      onChange={(e) => handleInputChange('expiryDate', e.target.value)}
+                      onChange={(e) => handleInputChange('expiryDate', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
                       placeholder="MM/YY"
                       required
+                      error={formErrors.expiryDate}
                     />
                     <Input
                       label="CVV"
-                      value={formData.cvv}
-                      onChange={(e) => handleInputChange('cvv', e.target.value)}
-                      placeholder="123"
+                      value={displayCvv}
+                      onChange={(e) => handleInputChange('cvv', e.target.value, formData, setFormData, setFormErrors, setDisplayCvv)}
+                      placeholder="***"
                       required
+                      error={formErrors.cvv}
                     />
                   </div>
                 </div>
@@ -168,7 +198,7 @@ export default function CheckoutPage() {
                 isLoading={isProcessing}
                 disabled={isProcessing}
               >
-                {isProcessing ? 'Processing...' : `Place Order - ${grandTotal.toFixed(2)}`}
+                {isProcessing ? 'Processing...' : `Place Order - $${grandTotal.toFixed(2)}`}
               </Button>
             </form>
           </div>
