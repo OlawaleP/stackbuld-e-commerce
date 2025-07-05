@@ -1,0 +1,98 @@
+[
+  {
+    "id": "1",
+    "slug": "wireless-headphones",
+    "name": "Wireless Bluetooth Headphones",
+    "description": "High-quality wireless headphones with noise cancellation and 30-hour battery life.",
+    "price": 199.99,
+    "image": "/images/headphones.jpg",
+    "category": "Electronics",
+    "inStock": true,
+    "rating": 4.5,
+    "reviews": 124
+  },
+  {
+    "id": "2",
+    "slug": "smart-watch",
+    "name": "Smart Fitness Watch",
+    "description": "Track your fitness goals with this advanced smartwatch featuring GPS and heart rate monitoring.",
+    "price": 299.99,
+    "image": "/images/smartwatch.jpg",
+    "category": "Electronics",
+    "inStock": true,
+    "rating": 4.3,
+    "reviews": 89
+  },
+  {
+    "id": "3",
+    "slug": "coffee-maker",
+    "name": "Premium Coffee Maker",
+    "description": "Brew the perfect cup of coffee every time with this premium automatic coffee maker.",
+    "price": 149.99,
+    "image": "/images/coffee-maker.jpg",
+    "category": "Home & Kitchen",
+    "inStock": false,
+    "rating": 4.7,
+    "reviews": 203
+  },
+  {
+    "id": "4",
+    "slug": "backpack",
+    "name": "Travel Backpack",
+    "description": "Durable and spacious backpack perfect for travel and daily use.",
+    "price": 79.99,
+    "image": "/images/backpack.jpg",
+    "category": "Fashion",
+    "inStock": true,
+    "rating": 4.2,
+    "reviews": 156
+  },
+  {
+    "id": "5",
+    "slug": "desk-lamp",
+    "name": "LED Desk Lamp",
+    "description": "Adjustable LED desk lamp with multiple brightness levels and USB charging port.",
+    "price": 59.99,
+    "image": "/images/desk-lamp.jpg",
+    "category": "Home & Office",
+    "inStock": true,
+    "rating": 4.4,
+    "reviews": 78
+  },
+  {
+    "id": "6",
+    "slug": "running-shoes",
+    "name": "Athletic Running Shoes",
+    "description": "Comfortable and lightweight running shoes designed for performance and style.",
+    "price": 129.99,
+    "image": "/images/running-shoes.jpg",
+    "category": "Sports",
+    "inStock": true,
+    "rating": 4.6,
+    "reviews": 267
+  },
+  {
+    "id": "7",
+    "slug": "phone-case",
+    "name": "Protective Phone Case",
+    "description": "Durable phone case with military-grade protection and wireless charging compatibility.",
+    "price": 24.99,
+    "image": "/images/phone-case.jpg",
+    "category": "Accessories",
+    "inStock": true,
+    "rating": 4.1,
+    "reviews": 342
+  },
+  {
+    "id": "8",
+    "slug": "bluetooth-speaker",
+    "name": "Portable Bluetooth Speaker",
+    "description": "Waterproof portable speaker with 360-degree sound and 12-hour battery life.",
+    "price": 89.99,
+    "image": "/images/bluetooth-speaker.jpg",
+    "category": "Electronics",
+    "inStock": true,
+    "rating": 4.5,
+    "reviews": 198
+  }
+]
