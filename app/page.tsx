@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useProducts } from '@/lib/queries/products';
 import { ProductGrid } from '@/components/organisms/ProductGrid';
 import { LoadingSpinner } from '@/components/atoms/LoadingSpinner';
