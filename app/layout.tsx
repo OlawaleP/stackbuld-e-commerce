@@ -6,14 +6,14 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  metadataBase: new URL('https://mini-commerce.vercel.app'),
+  metadataBase: new URL('https://stackbuild.netlify.app'),
   title: 'Stackbuild - Your One-Stop Shop',
   description: 'Discover amazing products at unbeatable prices. Shop electronics, fashion, home goods, and more.',
   keywords: 'e-commerce, shopping, electronics, fashion, home goods',
   openGraph: {
     title: 'Stackbuild - Your One-Stop Shop',
     description: 'Discover amazing products at unbeatable prices.',
-    url: 'https://mini-commerce.vercel.app',
+    url: 'https://stackbuild.netlify.app',
     siteName: 'Stackbuild',
     images: [
       {
