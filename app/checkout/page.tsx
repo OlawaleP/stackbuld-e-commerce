@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useCartStore } from '@/lib/store/cart-store';
 import { Button } from '@/components/atoms/Button';
 import { Price } from '@/components/atoms/Price';
