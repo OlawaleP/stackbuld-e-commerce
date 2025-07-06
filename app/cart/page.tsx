@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useCartStore } from '@/lib/store/cart-store';
 import { Button } from '@/components/atoms/Button';
 import { Price } from '@/components/atoms/Price';
@@ -28,7 +29,7 @@ export default function CartPage() {
               Your cart is empty
             </h2>
             <p className="mb-8 text-gray-600">
-              Looks like you haven't added any items to your cart yet.
+              Looks like you haven&apos;t added any items to your cart yet.
             </p>
             <Link href="/">
               <Button size="lg">Continue Shopping</Button>
