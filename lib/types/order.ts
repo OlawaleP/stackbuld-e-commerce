@@ -34,3 +34,18 @@ export interface OrderItemsListProps {
     quantity: number;
   }>;
 }
+
+export interface OrderSummary {
+  id: string;
+  date: string;
+  total: number;
+  status: string;
+}
+
+export interface OrderTableProps {
+  orders: OrderSummary[];
+}
+
+export interface OrderRowProps {
+  order: OrderSummary;
+}
