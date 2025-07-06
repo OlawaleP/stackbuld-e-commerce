@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Input } from '@/components/atoms/Input';
 import { Button } from '@/components/atoms/Button';
 import { Price } from '@/components/atoms/Price';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Product } from '@/lib/types/product';
 import { ProductCard } from '@/components/molecules/ProductCard';
 

@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { useCartStore } from '@/lib/store/cart-store';
 import { Badge } from '@/components/atoms/Badge';

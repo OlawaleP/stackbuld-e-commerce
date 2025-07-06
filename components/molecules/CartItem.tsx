@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import { Price } from '@/components/atoms/Price';
 import { Button } from '@/components/atoms/Button';

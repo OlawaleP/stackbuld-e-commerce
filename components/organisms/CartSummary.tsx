@@ -1,3 +1,4 @@
+import React from 'react';
 import { Price } from '@/components/atoms/Price';
 import { Button } from '@/components/atoms/Button';
 import { CartItem as CartItemType } from '@/lib/types/product';

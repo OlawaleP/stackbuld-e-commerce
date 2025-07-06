@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react';
-
 interface CheckoutForm {
   email: string;
   firstName: string;
@@ -100,7 +98,7 @@ export const handleInputChange = (
   setFormErrors: (errors: FormErrors | ((prevErrors: FormErrors) => FormErrors)) => void,
   setDisplayCvv: (value: string) => void
 ) => {
-  let updatedFormData = { ...formData };
+  const updatedFormData = { ...formData };
 
   if (field === 'cardNumber') {
     const formatted = formatCardNumber(value);
