@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useProduct } from '@/lib/queries/products';
 import { useCartStore } from '@/lib/store/cart-store';
 import { Button } from '@/components/atoms/Button';
@@ -33,7 +34,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600">Product Not Found</h2>
           <p className="mt-2 text-gray-600">
-            The product you're looking for doesn't exist.
+            The product you&apos;re looking for doesn&apos;t exist.
           </p>
         </div>
       </MainLayout>
