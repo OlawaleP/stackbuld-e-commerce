@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useOrder } from '@/lib/queries/orders';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { Price } from '@/components/atoms/Price';
@@ -36,7 +37,7 @@ export default function OrderDetailsPage() {
       >
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600">Order Not Found</h2>
-          <p className="mt-2 text-gray-600">The order you're looking for doesn't exist.</p>
+          <p className="mt-2 text-gray-600">The order you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/orders" className="mt-4 inline-block">
             <Button>Back to Orders</Button>
           </Link>
