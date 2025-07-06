@@ -67,8 +67,8 @@ export default function CheckoutPage() {
         })),
       };
       
-      const existingOrders = JSON.parse(localStorage.getItem('mini-commerce-orders') || '[]');
-      setToStorage('mini-commerce-orders', [...existingOrders, order]);
+      const existingOrders = JSON.parse(localStorage.getItem('stackbuild-orders') || '[]');
+      setToStorage('stackbuild-orders', [...existingOrders, order]);
       
       clearCart();
       router.push(`/success?orderId=${orderId}`);

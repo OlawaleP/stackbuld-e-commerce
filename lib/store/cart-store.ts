@@ -68,7 +68,7 @@ export const useCartStore = create<CartState>()(
       },
     }),
     {
-      name: 'mini-commerce-cart',
+      name: 'stackbuild-cart',
       version: 1,
     }
   )

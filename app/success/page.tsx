@@ -61,7 +61,7 @@ export default function SuccessPage() {
   return (
     <MainLayout
       title="Order Confirmation"
-      description="Thank you for your purchase at Mini-Commerce"
+      description="Thank you for your purchase at Stackbuild"
     >
       <Suspense fallback={
         <div className="container mx-auto px-4 py-16 text-center">

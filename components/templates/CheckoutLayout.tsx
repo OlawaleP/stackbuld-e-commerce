@@ -12,7 +12,7 @@ export const CheckoutLayout: React.FC<CheckoutLayoutProps> = ({ children }) => {
     <>
       <SEO 
         title="Checkout"
-        description="Complete your purchase at Mini-Commerce"
+        description="Complete your purchase at Stackbuild"
       />
       <div className="flex min-h-screen flex-col">
         <Header />

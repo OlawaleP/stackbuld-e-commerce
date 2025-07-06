@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Product } from '../types/product';
 import { getFromStorage, setToStorage } from '@/lib/utils/storage';
 
-const PRODUCTS_KEY = 'mini-commerce-products';
+const PRODUCTS_KEY = 'stackbuild-products';
 
 const seedProducts = async (): Promise<Product[]> => {
   const stored = getFromStorage<Product[]>(PRODUCTS_KEY, []);

@@ -8,14 +8,14 @@ import Link from 'next/link';
 export default function AboutPage() {
   return (
     <MainLayout
-      title="About Mini-Commerce"
-      description="Learn about Mini-Commerce, your go-to platform for simple and secure online shopping."
+      title="About Stackbuild"
+      description="Learn about Stackbuild, your go-to platform for simple and secure online shopping."
     >
       <div className="container mx-auto px-4 py-12">
         <section className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">About Stackbuild-Commerce</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">About Stackbuild</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Stackbuild-Commerce is your one-stop shop for a seamless online shopping experience. We’re dedicated to providing high-quality products, secure checkout, and a user-friendly platform to make your shopping effortless and enjoyable.
+            Stackbuild is your one-stop shop for a seamless online shopping experience. We’re dedicated to providing high-quality products, secure checkout, and a user-friendly platform to make your shopping effortless and enjoyable.
           </p>
         </section>
 
@@ -23,7 +23,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Our Mission</h2>
           <div className="bg-gray-50 rounded-lg p-6 max-w-3xl mx-auto">
             <p className="text-gray-600">
-              At Mini-Commerce, our mission is to simplify online shopping by offering a curated selection of products, transparent pricing, and exceptional customer service. We believe in making every purchase a delightful experience, from browsing to delivery.
+              At Stackbuild, our mission is to simplify online shopping by offering a curated selection of products, transparent pricing, and exceptional customer service. We believe in making every purchase a delightful experience, from browsing to delivery.
             </p>
           </div>
         </section>
@@ -55,7 +55,7 @@ export default function AboutPage() {
         <section className="mt-12 text-center">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Start Shopping Today</h2>
           <p className="text-gray-600 mb-6">
-            Discover our wide range of products and experience the Mini-Commerce difference.
+            Discover our wide range of products and experience the Stackbuild difference.
           </p>
           <Link href="/">
             <Button size="lg">Shop Now</Button>

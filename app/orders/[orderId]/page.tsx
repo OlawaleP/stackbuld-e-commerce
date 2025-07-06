@@ -20,7 +20,7 @@ export default function OrderDetailsPage() {
     return (
       <MainLayout
         title="Order Details"
-        description="View details of your order at Mini-Commerce"
+        description="View details of your order at Stackbuild"
       >
         <div className="flex min-h-[400px] items-center justify-center">
           <LoadingSpinner size="lg" />
@@ -33,7 +33,7 @@ export default function OrderDetailsPage() {
     return (
       <MainLayout
         title="Order Not Found"
-        description="View details of your order at Mini-Commerce"
+        description="View details of your order at Stackbuild"
       >
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600">Order Not Found</h2>
@@ -49,7 +49,7 @@ export default function OrderDetailsPage() {
   return (
     <MainLayout
       title={`Order ${order.id}`}
-      description={`Details for order ${order.id} at Mini-Commerce`}
+      description={`Details for order ${order.id} at Stackbuild`}
     >
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Order } from '../types/order';
 import { getFromStorage } from '../utils/storage';
 
-const ORDERS_KEY = 'mini-commerce-orders';
+const ORDERS_KEY = 'stackbuild-orders';
 
 const fetchOrders = async (): Promise<Order[]> => {
   const orders = getFromStorage<Order[]>(ORDERS_KEY, []);

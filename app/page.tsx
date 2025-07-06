@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <MainLayout
       title="Our Products"
-      description="Discover our amazing collection of products at Mini-Commerce"
+      description="Discover our amazing collection of products at Stackbuild"
     >
       {isLoading ? (
         <div className="flex min-h-[400px] items-center justify-center">

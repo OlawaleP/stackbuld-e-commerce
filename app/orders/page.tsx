@@ -14,7 +14,7 @@ export default function OrdersPage() {
 
   if (isLoading) {
     return (
-      <MainLayout title="Order History" description="View your past orders at Mini-Commerce">
+      <MainLayout title="Order History" description="View your past orders at Stackbuild">
         <div className="flex min-h-[400px] items-center justify-center">
           <LoadingSpinner size="lg" />
         </div>
@@ -24,7 +24,7 @@ export default function OrdersPage() {
 
   if (error) {
     return (
-      <MainLayout title="Order History" description="View your past orders at Mini-Commerce">
+      <MainLayout title="Order History" description="View your past orders at Stackbuild">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600">Error Loading Orders</h2>
           <p className="mt-2 text-gray-600">Unable to fetch orders. Please try again later.</p>
@@ -34,7 +34,7 @@ export default function OrdersPage() {
   }
 
   return (
-    <MainLayout title="Order History" description="View your past orders at Mini-Commerce">
+    <MainLayout title="Order History" description="View your past orders at Stackbuild">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Order History</h1>

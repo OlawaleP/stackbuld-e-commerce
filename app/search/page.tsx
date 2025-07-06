@@ -67,7 +67,7 @@ export default function SearchPage() {
   return (
     <MainLayout
       title="Search Results"
-      description="Find products at Mini-Commerce"
+      description="Find products at Stackbuild"
     >
       <Suspense fallback={
         <div className="container mx-auto px-4 py-8">
