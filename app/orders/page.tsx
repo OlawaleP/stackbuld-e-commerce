@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useOrders } from '@/lib/queries/orders';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { Price } from '@/components/atoms/Price';
@@ -78,7 +79,7 @@ export default function OrdersPage() {
         ) : (
           <div className="text-center">
             <h2 className="text-xl font-medium text-gray-900">No Orders Found</h2>
-            <p className="mt-2 text-gray-600">You haven't placed any orders yet.</p>
+            <p className="mt-2 text-gray-600">You haven&apos;t placed any orders yet.</p>
             <Link href="/" className="mt-4 inline-block">
               <Button>Shop Now</Button>
             </Link>
