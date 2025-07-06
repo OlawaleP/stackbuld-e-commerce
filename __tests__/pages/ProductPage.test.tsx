@@ -1,8 +1,17 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useProduct } from '@/lib/queries/products'; 
 import { useCartStore } from '@/lib/store/cart-store';
 import { Product } from '@/lib/types/product';
 import ProductPage from '@/app/product/[slug]/page';
+
+interface ImageProps {
+  src: string;
+  alt: string;
+  width?: number | string;
+  height?: number | string;
+  className?: string;
+}
 
 jest.mock('@/lib/queries/products', () => ({
   useProduct: jest.fn(), 
@@ -13,7 +22,7 @@ jest.mock('@/lib/store/cart-store', () => ({
 }));
 
 jest.mock('next/image', () => {
-  const MockImage = ({ src, alt, width, height, className }: any) => (
+  const MockImage = ({ src, alt, width, height, className }: ImageProps) => (
     <img src={src} alt={alt} width={width} height={height} className={className} />
   );
   MockImage.displayName = 'MockImage';
