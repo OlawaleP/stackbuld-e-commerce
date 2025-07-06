@@ -13,7 +13,7 @@ interface UseProductPageReturn {
   canAddToCart: boolean;
 }
 
-export const useProductPageEnhanced = (slug: string): UseProductPageReturn => {
+export const useProductPage = (slug: string): UseProductPageReturn => {
   const [quantity, setQuantity] = useState<number>(1);
   const { data: product, isLoading, error } = useProduct(slug);
   const addItem = useCartStore((state) => state.addItem);
