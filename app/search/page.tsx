@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useProducts } from '@/lib/queries/products';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { Price } from '@/components/atoms/Price';
@@ -24,7 +25,7 @@ export default function SearchPage() {
     >
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Search Results for "{query || 'All Products'}"
+          Search Results for &quot;{query || 'All Products'}&quot;
         </h1>
         {isLoading ? (
           <div className="flex justify-center py-8">
@@ -59,7 +60,7 @@ export default function SearchPage() {
           </div>
         ) : (
           <div className="text-center text-gray-600">
-            No products found for "{query}"
+            No products found for &quot;{query}&quot;
           </div>
         )}
       </div>
