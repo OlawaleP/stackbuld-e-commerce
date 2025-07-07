@@ -2,7 +2,7 @@
 'use client';
 
 import { useCartStore } from '@/lib/store/cart-store';
-import { EmptyCart } from '@/components/molecules/EmptyCart';
+import { EmptyCart } from '@/components/organisms/EmptyCart';
 import { OrderSummary } from '@/components/organisms/OrderSummary';
 import { CartHeader } from '../molecules/CartHeader';
 import { CartItemsList } from './CartItemsList';
