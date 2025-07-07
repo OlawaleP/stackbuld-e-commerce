@@ -1,38 +1,49 @@
-  {
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "node": true,
-      "jest": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "next/core-web-vitals",
-      "next",
-      "plugin:jest/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaVersion": 12,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "plugins": [
-      "@typescript-eslint",
-      "react",
-      "jest"
-    ],
-      "settings": {
-    "react": {
-      "version": "detect"
+{
+  "extends": [
+    "next/core-web-vitals",
+    "@typescript-eslint/recommended",
+    "plugin:testing-library/react"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "testing-library"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
   },
-    "rules": {
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off",
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "testing-library/no-render-in-setup": "error",
+    "testing-library/no-wait-for-empty-callback": "error",
+    "testing-library/prefer-screen-queries": "error",
+    "testing-library/no-container": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*", "**/*.test.*", "**/*.spec.*"],
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
     }
-  }
+  ]
+}

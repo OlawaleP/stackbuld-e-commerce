@@ -12,7 +12,6 @@ interface ProductActionsProps {
 }
 
 export const ProductActions: React.FC<ProductActionsProps> = ({
-  product,
   quantity,
   onQuantityChange,
   onAddToCart,

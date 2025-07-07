@@ -16,7 +16,6 @@ export const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
   order,
   isLoading,
   error,
-  orderId,
 }) => {
   const getTitle = (): string => {
     if (isLoading) return 'Loading Order Details';
